@@ -1,30 +1,37 @@
-// import AuthButtons from "../UI/AuthButtons";
-// import UserMenu from "../UI/UserMenu";
 import { Link } from "react-router-dom";
 import { NAV_LINKS } from "./navbar.config";
 
+// 1. Ensures role strictly matches the keys defined in your config file
 type Role = keyof typeof NAV_LINKS;
-function Navbar({ role = "guest" }: { role?: Role }) {
-  const links = NAV_LINKS[role];
+
+interface NavbarProps {
+  role?: Role;
+}
+
+function Navbar({ role = "guest" }: NavbarProps) {
+  const links = NAV_LINKS[role] || NAV_LINKS["guest"];
 
   return (
-    <nav className="h-16 flex items-center px-12 justify-between">
-      <span>⚡ Speakify</span>
+    <nav className="h-16 flex items-center px-12 justify-between border-b border-gray-100">
+      {/* 1. Left Corner Item */}
+      <Link to="/" className="font-bold text-lg flex items-center gap-1">
+        <span>⚡</span> Speakify
+      </Link>
 
-      <div className="flex gap-6 text-sm text-gray-600">
+      {/* 2. Right Corner Item (No trailing items after this) */}
+      <div className="flex gap-6 text-sm font-medium text-gray-600">
         {links.map((link) => (
           <Link
             key={link.path}
             to={link.path}
-            className="text-sm text-gray-600"
+            className="hover:text-black transition-colors"
           >
             {link.label}
           </Link>
         ))}
       </div>
-
-      {/*{role === "guest" ? <AuthButtons /> : <UserMenu />} */}
     </nav>
   );
 }
+
 export default Navbar;

@@ -1,0 +1,131 @@
+{
+  "buyers": [
+    {
+      "id": "b1",
+      "name": "Sarah Jenkins",
+      "number": "+44 7700 900077",
+      "email": "sarah.j@techcorp.uk",
+      "bookedSpeakerCategory": "Generative AI & Tech",
+      "requestedSessionDate": "2026-09-14",
+      "location": "London, UK",
+      "budget": 4500
+    },
+    {
+      "id": "b2",
+      "name": "David Attah",
+      "number": "+44 7700 900123",
+      "email": "d.attah@growthsummit.com",
+      "bookedSpeakerCategory": "Leadership & Scaling",
+      "requestedSessionDate": "2026-11-02",
+      "location": "Manchester, UK",
+      "budget": 6000
+    },
+    {
+      "id": "b3",
+      "name": "Elena Rostova",
+      "number": "+44 7700 900456",
+      "email": "elena.r@fintechforward.io",
+      "bookedSpeakerCategory": "FinTech & Web3",
+      "requestedSessionDate": "2026-10-15",
+      "location": "Edinburgh, UK",
+      "budget": 3500
+    },
+    {
+      "id": "b4",
+      "name": "Marcus Vance",
+      "number": "+44 7700 900789",
+      "email": "marcus@vancecreative.co",
+      "bookedSpeakerCategory": "UI/UX & Product Design",
+      "requestedSessionDate": "2026-08-20",
+      "location": "Bristol, UK",
+      "budget": 2800
+    },
+    {
+      "id": "b5",
+      "name": "Priya Nair",
+      "number": "+44 7700 900344",
+      "email": "priya.nair@hr-transform.org",
+      "bookedSpeakerCategory": "Workplace Culture",
+      "requestedSessionDate": "2026-12-05",
+      "location": "Birmingham, UK",
+      "budget": 5000
+    }
+  ],
+  "speakers": [
+    {
+      "id": "s1",
+      "name": "Dr. Aris Thorne",
+      "title": "Principal AI Researcher & Futurist",
+      "category": "Generative AI & Tech",
+      "rating": 4.9,
+      "location": "Cambridge, UK",
+      "price": 4000
+    },
+    {
+      "id": "s2",
+      "name": "Yemi Adeyemi",
+      "title": "Ex-Unilever VP of Global Strategy",
+      "category": "Leadership & Scaling",
+      "rating": 4.8,
+      "location": "London, UK",
+      "price": 5500
+    },
+    {
+      "id": "s3",
+      "name": "Liam Zhao",
+      "title": "Head of Decentralized Finance at VaultX",
+      "category": "FinTech & Web3",
+      "rating": 4.7,
+      "location": "London, UK",
+      "price": 3200
+    },
+    {
+      "id": "s4",
+      "name": "Chloe Sterling",
+      "title": "Author of 'Designing for the Next Billion'",
+      "category": "UI/UX & Product Design",
+      "rating": 5.0,
+      "location": "Oxford, UK",
+      "price": 3000
+    },
+    {
+      "id": "s5",
+      "name": "Robert Vance",
+      "title": "Behavioral Psychologist & Remote Work Expert",
+      "category": "Workplace Culture",
+      "rating": 4.6,
+      "location": "Leeds, UK",
+      "price": 4200
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "title": "UK FinTech Pioneers Summit 2026",
+      "location": "Birmingham NEC",
+      "date": "2026-10-22",
+      "availability": "Confirmed"
+    },
+    {
+      "id": "e2",
+      "title": "Future of Product Design Masterclass",
+      "location": "Online (Zoom Live)",
+      "date": "2026-08-05",
+      "availability": "Pending Approval"
+    },
+    {
+      "id": "e3",
+      "title": "AI & Ethics Round Table",
+      "location": "The Shard, London",
+      "date": "2026-09-18",
+      "availability": "Confirmed"
+    },
+    {
+      "id": "e4",
+      "title": "SaaS Scaleups Boot Camp",
+      "location": "Manchester Central",
+      "date": "2026-11-12",
+      "availability": "Pending Approval"
+    }
+  ]
+}

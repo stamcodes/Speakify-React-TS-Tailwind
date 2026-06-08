@@ -1,26 +1,25 @@
-//navbar.config.ts
+// navbar.config.ts
 export const NAV_LINKS = {
   guest: [
-    { label: "Find Speakers", path: "#" },
-    { label: "Explore Events", path: "#" },
+    { label: "Find Speakers", path: "#findSpeakers" },
+    { label: "Explore Events", path: "#exploreEvents" },
   ],
-
-  attendee: [
-    { label: "Dashboard", path: "#" },
-    { label: "Find Speakers", path: "#" },
-    { label: "My Events", path: "#" },
-    { label: "My Bookings", path: "#" },
+  buyer: [
+    { label: "Dashboard", path: "#dashboard" },
+    { label: "Find Speakers", path: "#findSpeakers" },
+    { label: "My Events", path: "#myEvents" },
+    { label: "My Bookings", path: "#myBookings" },
   ],
-
   speaker: [
-    { label: "Dashboard", path: "#" },
-    { label: "Explore Events", path: "#" },
-    { label: "My Events", path: "#" },
-    { label: "My Applications", path: "#" },
+    { label: "Dashboard", path: "#dashboard" },
+    { label: "Explore Events", path: "#exploreEvents" },
+    { label: "My Events", path: "#myEvents" },
+    { label: "My Applications", path: "#myApplications" },
   ],
-
   organizer: [
-    { label: "Dashboard", path: "#" },
-    { label: "My Speakers", path: "#" },
+    { label: "Dashboard", path: "#dashboard" },
+    { label: "My Speakers", path: "#mySpeakers" },
   ],
 };
+
+export type Role = keyof typeof NAV_LINKS;
