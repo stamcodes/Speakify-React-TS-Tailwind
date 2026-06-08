@@ -1,5 +1,6 @@
 // App.tsx
 import { Link } from "react-router-dom";
+import SearchBar from "./components/UI/SearchBar";
 import Navbar from "./components/layout/Navbar";
 import "./index.css";
 
@@ -42,7 +43,8 @@ function App() {
             Shortlist in minutes and confirm with confidence
           </p>
 
-          {/* <SearchBar /> */}
+          {/* Search bar */}
+          <SearchBar />
         </div>
 
         {/* Right Column — full height, bleeds to edge */}
