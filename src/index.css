@@ -1,0 +1,39 @@
+/* index.css */
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: "Saans-TRIAL", sans-serif;
+
+  /* Brand Colors */
+  --color-bg: #f6f1e4;
+  --color-heading: #191711;
+  --color-purple: #bdcaef;
+  --color-grey: #817e75;
+
+  /* Shape Colors */
+  --color-hero-green: #b1eedc;
+  --color-card1: #e0c5a1;
+  --color-card1-bg: #f4eee6;
+  --color-card2: #a89cb4;
+  --color-card2-bg: #f0eced;
+  --color-card3: #a5acc0;
+  --color-card3-bg: #eeeded;
+  --color-card4: #7f9e9a;
+  --color-card4-bg: #e7ede8;
+
+  /* Footer Gradient */
+  --color-footer-cream: #f6eede;
+  --color-footer-pink: #edc0c5;
+  --color-footer-yellow: #e7e7d5;
+  --color-footer-purple: #d5d1e2;
+}
+
+/* Global base styles */
+@layer base {
+  body {
+    background-color: #f6f1e4;
+    font-family: "Saans-TRIAL", sans-serif;
+    color: #191711;
+  }
+}
