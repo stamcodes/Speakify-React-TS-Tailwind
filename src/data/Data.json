@@ -51,6 +51,16 @@
       "budget": 5000
     }
   ],
+
+  "brands": [
+    { "id": "br1", "name": "Microsoft", "logo": "/images/Microsoft.png" },
+    { "id": "br2", "name": "Tesco", "logo": "/images/tesco.png" },
+    { "id": "br3", "name": "Uber", "logo": "/images/Uber.png" },
+    { "id": "br4", "name": "HSBC", "logo": "/images/HSBC.png" },
+    { "id": "br5", "name": "Coca-Cola", "logo": "/images/cocacola.png" },
+    { "id": "br6", "name": "Google", "logo": "/images/Google.png" }
+  ],
+
   "speakers": [
     {
       "id": "s1",

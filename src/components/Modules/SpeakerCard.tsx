@@ -45,7 +45,7 @@ function SpeakerCard() {
       {/* Blob with arrow baked in */}
       <button
         onClick={() => {}}
-        className="absolute -bottom-14 -right-16 hover:opacity-80 transition-opacity flex items-center justify-center w-28 h-28"
+        className="absolute cursor-pointer -bottom-14 -right-16 hover:opacity-80 transition-opacity flex items-center justify-center w-28 h-28"
       >
         {/* Blob shape SVG — replace src */}
         <img
