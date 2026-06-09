@@ -12,30 +12,24 @@ function Navbar({ role = "guest", end }: NavbarProps) {
   const links = NAV_LINKS[role];
 
   return (
-    <nav className="absolute top-0 left-0 w-full h-16 flex items-center px-12 justify-between z-10">
-      {/* Logo — always dark */}
-      <Link
-        to="/"
-        className="font-bold text-lg flex items-center gap-1 text-gray-900"
-      >
-        <img src="/images/SpeakifyLogoDark.png" alt="" />
+    <nav className="absolute top-0 left-0 w-full h-16 flex items-center z-10 px-12 pt-6">
+      <Link to="/" className="w-[20%] flex items-center">
+        <img src="/images/SpeakifyLogoDark.png" alt="Speakify" />
       </Link>
 
-      {/* Middle links — white if overlapsImage */}
-      <div className="flex gap-6 text-sm font-medium text-gray-600">
+      <div className="flex gap-6 text-sm font-normal text-grey">
         {links.map((link) => (
           <Link
             key={link.path}
             to={link.path}
-            className="hover:opacity-80 transition-opacity"
+            className="hover:text-heading transition-colors"
           >
             {link.label}
           </Link>
         ))}
       </div>
 
-      {/* Right slot */}
-      <div className="flex items-center gap-3">{end}</div>
+      <div className="flex items-center ml-auto px-4">{end}</div>
     </nav>
   );
 }

@@ -31,7 +31,7 @@ function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           placeholder="I'm looking for a motivational speaker ..."
-          className="flex-1 bg-transparent outline-none text-sm text-gray-500 placeholder-gray-400"
+          className="flex-1 bg-transparent outline-none text-sm font-normal text-grey placeholder:text-grey/60"
         />
         <button
           onClick={handleSearch}

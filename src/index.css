@@ -6,8 +6,8 @@
   src:
     url("/fonts/SaansTRIAL-Regular.woff2") format("woff2"),
     url("/fonts/SaansTRIAL-Regular.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
+  font-weight: 100;
+  font-style: light;
 }
 
 @font-face {
@@ -15,8 +15,8 @@
   src:
     url("/fonts/SaansTRIAL-Bold.woff2") format("woff2"),
     url("/fonts/SaansTRIAL-Bold.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
+  font-weight: 100;
+  font-style: light;
 }
 
 @font-face {
@@ -24,8 +24,8 @@
   src:
     url("/fonts/SaansTRIAL-SemiBold.woff2") format("woff2"),
     url("/fonts/SaansTRIAL-SemiBold.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
+  font-weight: 100;
+  font-style: light;
 }
 @theme {
   /* Fonts */
@@ -60,6 +60,5 @@
   body {
     background-color: #f6f1e4;
     font-family: "Saans-TRIAL", sans-serif;
-    color: #191711;
   }
 }
