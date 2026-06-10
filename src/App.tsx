@@ -6,6 +6,7 @@ import SpeakerCard from "./components/Modules/SpeakerCard";
 import BrandStrip from "./components/Modules/BrandStrip";
 import Button from "./components/UI/Button";
 import AuthorCard from "./components/Modules/AuthorCard";
+import FAQItem from "./components/Modules/FAQItem";
 import "./index.css";
 
 const GuestActions = (
@@ -68,7 +69,6 @@ function App() {
               "linear-gradient(to bottom, black 0%, transparent 100%)",
           }}
         />
-
         {/*Brand logo + AuthorCard section  */}
         <section
           className="w-full px-12 pt-10 pb-16 flex flex-col items-center gap-10"
@@ -137,7 +137,6 @@ function App() {
             </div>
           </div>
         </section>
-
         {/* 3 steps to Book Speaker */}
         <section className="px-16 py-8">
           {/* Header */}
@@ -203,6 +202,48 @@ function App() {
                 />
               </div>
             </div>
+          </div>
+        </section>
+        {/* FAQ Accordion */}
+
+        <section className="px-64 py-20">
+          <h2 className="text-4xl font-bold text-heading text-center mb-12">
+            All your questions answered
+          </h2>
+          <div className="flex flex-col">
+            {[
+              {
+                question: "How do I find the right speaker?",
+                answer:
+                  "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
+              },
+              {
+                question: "How do I find the right speaker?",
+                answer:
+                  "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
+              },
+              {
+                question: "How does Speakify match me with the right speaker?",
+                answer:
+                  "Our AI analyses your brief, budget, audience, and event type to surface the most relevant speakers — ranked by fit, not just popularity.",
+              },
+              {
+                question: "What types of payments does Speakify accept?",
+                answer:
+                  "We accept card payments, invoices, and purchase orders for events with 60-90 day lead times.",
+              },
+              {
+                question: "Why list as a speaker on Speakify?",
+                answer:
+                  "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place.",
+              },
+            ].map((item, index) => (
+              <FAQItem
+                key={index}
+                question={item.question}
+                answer={item.answer}
+              />
+            ))}
           </div>
         </section>
       </div>
