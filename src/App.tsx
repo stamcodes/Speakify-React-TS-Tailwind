@@ -7,6 +7,8 @@ import BrandStrip from "./components/Modules/BrandStrip";
 import Button from "./components/UI/Button";
 import AuthorCard from "./components/Modules/AuthorCard";
 import FAQItem from "./components/Modules/FAQItem";
+import GradientBg from "./components/UI/GradientBg";
+import Footer from "./components/layout/Footer";
 import "./index.css";
 
 const GuestActions = (
@@ -271,6 +273,33 @@ function App() {
           ))}
         </div>
       </section>
+
+      {/* Gradient BG section with CTA */}
+      <section>
+        <GradientBg>
+          <h2 className="text-3xl font-bold text-heading text-center max-w-xs leading-snug">
+            The best speakers are waiting for you
+          </h2>
+          <Button
+            label="Book speaker now"
+            icon="/icons/speakifyLogoDark.svg"
+            variant="light"
+          />
+        </GradientBg>
+      </section>
+
+      <Footer
+        tagline="Find your perfect speaker in 3 simple steps using AI-assisted matching"
+        navLinks={[
+          { label: "Find Speakers", href: "#" },
+          { label: "Explore Events", href: "#" },
+          { label: "Join as a Speaker", href: "#" },
+        ]}
+        legalLinks={[
+          { label: "Terms of Use", href: "#" },
+          { label: "Privacy Policy", href: "#" },
+        ]}
+      />
     </div>
   );
 }
