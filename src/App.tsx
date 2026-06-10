@@ -1,5 +1,4 @@
 // App.tsx
-import { Link } from "react-router-dom";
 import SearchBar from "./components/UI/SearchBar";
 import Navbar from "./components/layout/Navbar";
 import SpeakerCard from "./components/Modules/SpeakerCard";
