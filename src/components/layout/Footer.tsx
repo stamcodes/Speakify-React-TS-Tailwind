@@ -72,10 +72,12 @@ function Footer({ navLinks, legalLinks, tagline }: FooterProps) {
         {/* Social icons */}
         <div className="flex items-center gap-4">
           <a href="#" className="text-grey hover:opacity-70 transition-opacity">
-            <img src="" alt="Instagram" className="w-5 h-5" />
+            {/* TODO : Add social icons with links here */}
+            {/* <img src="" alt="Instagram" className="w-5 h-5" /> */}
           </a>
           <a href="#" className="text-grey hover:opacity-70 transition-opacity">
-            <img src="" alt="LinkedIn" className="w-5 h-5" />
+            {/* TODO : Add social icons with links here */}
+            {/* <img src="" alt="LinkedIn" className="w-5 h-5" /> */}
           </a>
         </div>
       </div>
