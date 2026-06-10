@@ -137,116 +137,140 @@ function App() {
             </div>
           </div>
         </section>
-        {/* 3 steps to Book Speaker */}
-        <section className="px-16 py-8">
-          {/* Header */}
-          <div className="mb-12">
-            <h2 className="text-4xl font-bold text-heading max-w-xs mb-4">
-              Just 3 steps to book your perfect speaker
-            </h2>
-            <p className="text-grey text-sm max-w-xs leading-relaxed">
-              A fast, transparent, AI-assisted booking flow —<br />
-              from brief to e-sign in minutes.
+      </div>
+
+      {/* 3 steps to Book Speaker */}
+      <section className="px-16 py-8">
+        {/* Header */}
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-heading max-w-xs mb-4">
+            Just 3 steps to book your perfect speaker
+          </h2>
+          <p className="text-grey text-sm max-w-xs leading-relaxed">
+            A fast, transparent, AI-assisted booking flow —<br />
+            from brief to e-sign in minutes.
+          </p>
+        </div>
+
+        {/* Steps */}
+        <div className="grid grid-cols-3 gap-8">
+          {/* Step 01 */}
+          <div className="flex flex-col gap-3">
+            <span className="text-5xl font-bold text-grey opacity-30">01</span>
+            <h3 className="text-base font-bold text-heading">Create a brief</h3>
+            <p className="text-grey text-sm leading-relaxed">
+              Type in plain English or upload your PDF/
+              <br />
+              email - our AI structures your brief instantly.
             </p>
           </div>
 
-          {/* Steps */}
-          <div className="grid grid-cols-3 gap-8">
-            {/* Step 01 */}
+          {/* Step 02 */}
+          <div className="flex flex-col gap-3 px-8 border-x border-grey/20">
+            <span className="text-5xl font-bold text-grey opacity-30">02</span>
+            <h3 className="text-base font-bold text-heading">
+              Review & Shortlist
+            </h3>
+            <p className="text-grey text-sm leading-relaxed">
+              See Top 5 AI matches, compare side-by-side, and share your
+              shortlist for quick approval.
+            </p>
+          </div>
+
+          {/* Step 03 */}
+          <div className="flex flex-col gap-3 justify-between">
             <div className="flex flex-col gap-3">
               <span className="text-5xl font-bold text-grey opacity-30">
-                01
+                03
               </span>
               <h3 className="text-base font-bold text-heading">
-                Create a brief
+                Book & confirm
               </h3>
               <p className="text-grey text-sm leading-relaxed">
-                Type in plain English or upload your PDF/
-                <br />
-                email - our AI structures your brief instantly.
+                One-click e-sign with transparent fees. Pay by card/invoice now,
+                or PO for 60-90 day events.
               </p>
             </div>
-
-            {/* Step 02 */}
-            <div className="flex flex-col gap-3 px-8 border-x border-grey/20">
-              <span className="text-5xl font-bold text-grey opacity-30">
-                02
-              </span>
-              <h3 className="text-base font-bold text-heading">
-                Review & Shortlist
-              </h3>
-              <p className="text-grey text-sm leading-relaxed">
-                See Top 5 AI matches, compare side-by-side, and share your
-                shortlist for quick approval.
-              </p>
-            </div>
-
-            {/* Step 03 */}
-            <div className="flex flex-col gap-3 justify-between">
-              <div className="flex flex-col gap-3">
-                <span className="text-5xl font-bold text-grey opacity-30">
-                  03
-                </span>
-                <h3 className="text-base font-bold text-heading">
-                  Book & confirm
-                </h3>
-                <p className="text-grey text-sm leading-relaxed">
-                  One-click e-sign with transparent fees. Pay by card/invoice
-                  now, or PO for 60-90 day events.
-                </p>
-              </div>
-              <div className="w-[60%] mt-5">
-                <Button
-                  label="Find speakers now"
-                  icon="/public/icons/speakifyLogoDark.svg"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* FAQ Accordion */}
-
-        <section className="px-64 py-20">
-          <h2 className="text-4xl font-bold text-heading text-center mb-12">
-            All your questions answered
-          </h2>
-          <div className="flex flex-col">
-            {[
-              {
-                question: "How do I find the right speaker?",
-                answer:
-                  "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
-              },
-              {
-                question: "How do I find the right speaker?",
-                answer:
-                  "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
-              },
-              {
-                question: "How does Speakify match me with the right speaker?",
-                answer:
-                  "Our AI analyses your brief, budget, audience, and event type to surface the most relevant speakers — ranked by fit, not just popularity.",
-              },
-              {
-                question: "What types of payments does Speakify accept?",
-                answer:
-                  "We accept card payments, invoices, and purchase orders for events with 60-90 day lead times.",
-              },
-              {
-                question: "Why list as a speaker on Speakify?",
-                answer:
-                  "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place.",
-              },
-            ].map((item, index) => (
-              <FAQItem
-                key={index}
-                question={item.question}
-                answer={item.answer}
+            <div className="w-[60%] mt-5">
+              <Button
+                label="Find speakers now"
+                icon="/public/icons/speakifyLogoDark.svg"
               />
-            ))}
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* Book a Speaker Section */}
+      <section className="px-16 py-20 flex items-center justify-center">
+        <div className="relative w-full flex items-center">
+          {/* Left image — overflows out of the capsule */}
+          <div className="absolute left-[112px] -top-[50px] z-10 w-72 h-96 ">
+            <img
+              src="/images/BookSpeaker.png"
+              alt="Speaker"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* White capsule */}
+          <div className="ml-50 w-[70%] bg-white rounded-[150px] flex items-center justify-end px-24 py-25">
+            <div className="flex flex-col gap-4 max-w-sm">
+              <h2 className="text-3xl font-bold text-heading">
+                Are you a speaker?
+              </h2>
+              <p className="text-grey text-sm leading-relaxed">
+                Join Speakify to control your profile, pricing, and bookings.
+              </p>
+              <div>
+                <Button label="Join now" variant="dark" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Accordion */}
+      <section className="px-64 py-20 mt-15">
+        <h2 className="text-4xl font-bold text-heading text-center mb-12">
+          All your questions answered
+        </h2>
+        <div className="flex flex-col">
+          {[
+            {
+              question: "How do I find the right speaker?",
+              answer:
+                "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
+            },
+            {
+              question: "How do I find the right speaker?",
+              answer:
+                "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
+            },
+            {
+              question: "How does Speakify match me with the right speaker?",
+              answer:
+                "Our AI analyses your brief, budget, audience, and event type to surface the most relevant speakers — ranked by fit, not just popularity.",
+            },
+            {
+              question: "What types of payments does Speakify accept?",
+              answer:
+                "We accept card payments, invoices, and purchase orders for events with 60-90 day lead times.",
+            },
+            {
+              question: "Why list as a speaker on Speakify?",
+              answer:
+                "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place.",
+            },
+          ].map((item, index) => (
+            <FAQItem
+              key={index}
+              question={item.question}
+              answer={item.answer}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
