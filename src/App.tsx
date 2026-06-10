@@ -99,6 +99,7 @@ function App() {
                   authorImage="/images/authorCardhero1.png"
                   cardBg="#f4eee6"
                   pillIcon="/icons/authorCard-Icon1.svg"
+                  imageMarginTop="-1px"
                 />
                 <AuthorCard
                   category="Strategy & Analysis"
@@ -107,6 +108,7 @@ function App() {
                   authorImage="/images/authorCardhero2.png"
                   cardBg="#f0eced"
                   pillIcon="/icons/authorCard-Icon2.svg"
+                  imageMarginTop="-3px"
                 />
                 <AuthorCard
                   category="Sales & Revenue Growth"
@@ -115,6 +117,7 @@ function App() {
                   authorImage="/images/authorCardhero3test.png"
                   cardBg="#eeeded"
                   pillIcon="/icons/authorCard-Icon3.svg"
+                  imageMarginTop="-14px"
                 />
                 <AuthorCard
                   category="AI Integration & Transformation"
@@ -123,6 +126,7 @@ function App() {
                   authorImage="/images/authorCardhero4.png"
                   cardBg="#e7ede8"
                   pillIcon="/icons/authorCard-Icon4.svg"
+                  imageMarginTop="-9px"
                 />
               </div>
             </div>

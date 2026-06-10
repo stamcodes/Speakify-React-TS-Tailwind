@@ -7,6 +7,7 @@ interface AuthorCardProps {
   authorImage: string;
   cardBg: string;
   pillIcon: string;
+  imageMarginTop?: string;
 }
 
 function AuthorCard({
@@ -16,6 +17,7 @@ function AuthorCard({
   authorImage,
   cardBg,
   pillIcon,
+  imageMarginTop,
 }: AuthorCardProps) {
   return (
     <div
@@ -35,7 +37,9 @@ function AuthorCard({
           alt={category}
           className="w-full h-full object-cover object-top"
           style={{
-            marginTop: "-43px",
+            marginTop: imageMarginTop
+              ? `calc(-43px + ${imageMarginTop})`
+              : "-43px",
           }}
         />
       </div>
