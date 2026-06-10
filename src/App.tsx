@@ -9,29 +9,14 @@ import AuthorCard from "./components/Modules/AuthorCard";
 import FAQItem from "./components/Modules/FAQItem";
 import GradientBg from "./components/UI/GradientBg";
 import Footer from "./components/layout/Footer";
+import GuestActions from "./components/UI/GuestActions";
+import Data from "./data/Data.json";
 import "./index.css";
-
-const GuestActions = (
-  <>
-    <Link
-      to="#joinAsSpeaker"
-      className="text-sm font-normal text-white underline underline-offset-2"
-    >
-      Join as a Speaker
-    </Link>
-    <Link
-      to="#login"
-      className="text-sm font-normal bg-white text-heading px-5 py-2 rounded-lg hover:opacity-90 transition-opacity ml-4"
-    >
-      Log In
-    </Link>
-  </>
-);
 
 function App() {
   return (
     <div className="min-h-screen relative">
-      <Navbar role="guest" end={GuestActions} />
+      <Navbar role="guest" end={<GuestActions />} />
 
       {/* Hero Section */}
       <section className="flex h-[110vh] gap-6 pr-3 pb-10">
@@ -196,7 +181,7 @@ function App() {
             <div className="w-[60%] mt-5">
               <Button
                 label="Find speakers now"
-                icon="/public/icons/speakifyLogoDark.svg"
+                icon="/icons/speakifyLogoDark.svg"
               />
             </div>
           </div>
@@ -233,40 +218,15 @@ function App() {
       </section>
 
       {/* FAQ Accordion */}
+      {/* FAQ Accordion */}
       <section className="px-64 py-20 mt-15">
         <h2 className="text-4xl font-bold text-heading text-center mb-12">
           All your questions answered
         </h2>
         <div className="flex flex-col">
-          {[
-            {
-              question: "How do I find the right speaker?",
-              answer:
-                "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
-            },
-            {
-              question: "How do I find the right speaker?",
-              answer:
-                "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth.",
-            },
-            {
-              question: "How does Speakify match me with the right speaker?",
-              answer:
-                "Our AI analyses your brief, budget, audience, and event type to surface the most relevant speakers — ranked by fit, not just popularity.",
-            },
-            {
-              question: "What types of payments does Speakify accept?",
-              answer:
-                "We accept card payments, invoices, and purchase orders for events with 60-90 day lead times.",
-            },
-            {
-              question: "Why list as a speaker on Speakify?",
-              answer:
-                "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place.",
-            },
-          ].map((item, index) => (
+          {Data.faq.map((item) => (
             <FAQItem
-              key={index}
+              key={item.id}
               question={item.question}
               answer={item.answer}
             />

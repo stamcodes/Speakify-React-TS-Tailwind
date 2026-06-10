@@ -37,6 +37,7 @@ function AuthorCard({
           alt={category}
           className="w-full h-full object-cover object-top"
           style={{
+            /* The MarginTop Logic: At -43px some of the authorCard images align perfectly with their parent container while others don't. Thus, we are using the -43px + a custom value with each authorCard picture to achieve the visual style same as the figma design.*/
             marginTop: imageMarginTop
               ? `calc(-43px + ${imageMarginTop})`
               : "-43px",

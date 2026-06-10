@@ -137,5 +137,28 @@
       "date": "2026-11-12",
       "availability": "Pending Approval"
     }
+  ],
+
+  "faq": [
+    {
+      "id": "faq1",
+      "question": "What is Speakify?",
+      "answer": "Speakify is a B2B platform for finding and booking professional speakers. Search by topic, budget, and fit — and go from brief to confirmed booking without the back-and-forth."
+    },
+    {
+      "id": "faq2",
+      "question": "How does Speakify match me with the right speaker?",
+      "answer": "Our AI analyses your brief, budget, audience, and event type to surface the most relevant speakers — ranked by fit, not just popularity."
+    },
+    {
+      "id": "faq3",
+      "question": "What types of payments does Speakify accept?",
+      "answer": "We accept card payments, invoices, and purchase orders for events with 60-90 day lead times."
+    },
+    {
+      "id": "faq4",
+      "question": "Why list as a speaker on Speakify?",
+      "answer": "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place."
+    }
   ]
 }
