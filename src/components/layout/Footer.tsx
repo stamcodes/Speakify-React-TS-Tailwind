@@ -23,8 +23,11 @@ function Footer({ navLinks, legalLinks, tagline }: FooterProps) {
         {/* Left — logo + tagline */}
         <div className="flex flex-col gap-3 max-w-xs">
           <div className="flex items-center gap-2">
-            <img src="" alt="Speakify logo" className="w-5 h-5" />
-            <span className="text-heading font-bold text-lg">Speakify</span>
+            <img
+              src="/images/SpeakifyLogoDark.png"
+              alt="Speakify logo"
+              className="w-30 h-7"
+            />
           </div>
           <p className="text-grey text-sm leading-relaxed">{tagline}</p>
         </div>
