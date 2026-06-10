@@ -69,6 +69,7 @@ function App() {
           }}
         />
 
+        {/*Brand logo + AuthorCard section  */}
         <section
           className="w-full px-12 pt-10 pb-16 flex flex-col items-center gap-10"
           style={{
@@ -133,6 +134,74 @@ function App() {
 
             <div className="flex justify-center mt-20">
               <Button label="Browse all categories" />
+            </div>
+          </div>
+        </section>
+
+        {/* 3 steps to Book Speaker */}
+        <section className="px-16 py-8">
+          {/* Header */}
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold text-heading max-w-xs mb-4">
+              Just 3 steps to book your perfect speaker
+            </h2>
+            <p className="text-grey text-sm max-w-xs leading-relaxed">
+              A fast, transparent, AI-assisted booking flow —<br />
+              from brief to e-sign in minutes.
+            </p>
+          </div>
+
+          {/* Steps */}
+          <div className="grid grid-cols-3 gap-8">
+            {/* Step 01 */}
+            <div className="flex flex-col gap-3">
+              <span className="text-5xl font-bold text-grey opacity-30">
+                01
+              </span>
+              <h3 className="text-base font-bold text-heading">
+                Create a brief
+              </h3>
+              <p className="text-grey text-sm leading-relaxed">
+                Type in plain English or upload your PDF/
+                <br />
+                email - our AI structures your brief instantly.
+              </p>
+            </div>
+
+            {/* Step 02 */}
+            <div className="flex flex-col gap-3 px-8 border-x border-grey/20">
+              <span className="text-5xl font-bold text-grey opacity-30">
+                02
+              </span>
+              <h3 className="text-base font-bold text-heading">
+                Review & Shortlist
+              </h3>
+              <p className="text-grey text-sm leading-relaxed">
+                See Top 5 AI matches, compare side-by-side, and share your
+                shortlist for quick approval.
+              </p>
+            </div>
+
+            {/* Step 03 */}
+            <div className="flex flex-col gap-3 justify-between">
+              <div className="flex flex-col gap-3">
+                <span className="text-5xl font-bold text-grey opacity-30">
+                  03
+                </span>
+                <h3 className="text-base font-bold text-heading">
+                  Book & confirm
+                </h3>
+                <p className="text-grey text-sm leading-relaxed">
+                  One-click e-sign with transparent fees. Pay by card/invoice
+                  now, or PO for 60-90 day events.
+                </p>
+              </div>
+              <div className="w-[60%] mt-5">
+                <Button
+                  label="Find speakers now"
+                  icon="/public/icons/speakifyLogoDark.svg"
+                />
+              </div>
             </div>
           </div>
         </section>
