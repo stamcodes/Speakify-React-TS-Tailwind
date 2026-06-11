@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import Authfields from "../components/Modules/Form/Authfields";
-import Verifyfields from "../components/Modules/Form/Verifyfields";
+import VerifyFields from "../components/Modules/Form/Verifyfields";
 import TestimonialCard from "../components/Modules/TestimonialCard";
 import GradientBg from "../components/UI/GradientBg";
 
@@ -19,7 +19,7 @@ function Auth() {
   };
 
   const handleVerified = () => {
-    navigate("/onboarding"); // adjust to your actual onboarding route
+    navigate("/onboarding");
   };
 
   return (
@@ -36,7 +36,7 @@ function Auth() {
               onSubmit={handleSubmit}
             />
           ) : (
-            <Verifyfields
+            <VerifyFields
               onBack={() => setStep("auth")}
               onVerified={handleVerified}
             />
