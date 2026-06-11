@@ -20,6 +20,7 @@ export const NAV_LINKS = {
     { label: "Dashboard", path: "#dashboard" },
     { label: "My Speakers", path: "#mySpeakers" },
   ],
+  auth: [],
 };
 
 export type Role = keyof typeof NAV_LINKS;

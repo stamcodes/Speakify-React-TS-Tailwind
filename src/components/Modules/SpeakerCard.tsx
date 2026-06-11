@@ -66,13 +66,13 @@ function SpeakerCard({ speaker }: SpeakerCardProps) {
         onClick={() => {}}
         className="absolute cursor-pointer -bottom-14 -right-16 hover:opacity-80 transition-opacity flex items-center justify-center w-28 h-28"
       >
-        {/* Blob shape SVG — replace src */}
+        {/* Blob shape SVG*/}
         <img
           src="/icons/hero-img-shape.svg"
           alt=""
           className="absolute inset-0 w-full h-full"
         />
-        {/* Arrow SVG — replace src */}
+        {/* Arrow SVG*/}
         <img
           src="/icons/hero-shape-arrow.svg"
           alt="arrow"

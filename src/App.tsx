@@ -32,7 +32,8 @@ function App() {
           </p>
           <SearchBar />
         </div>
-
+        {/* Right Column TODO : Convert to Component to be used across other screens
+        Use SpeakerCard with distinct values....  */}
         <div className="relative flex-1 rounded-3xl overflow-hidden mt-3">
           <img
             src="images/hero-img-home.png"
@@ -216,7 +217,6 @@ function App() {
         </div>
       </section>
 
-      {/* FAQ Accordion */}
       {/* FAQ Accordion */}
       <section className="px-64 py-20 mt-15">
         <h2 className="text-4xl font-bold text-heading text-center mb-12">

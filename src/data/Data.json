@@ -61,6 +61,33 @@
     { "id": "br6", "name": "Google", "logo": "/images/Google.png" }
   ],
 
+  "testimonials": [
+    {
+      "id": "t1",
+      "quote": "Speakify brought me opportunities I wouldn't have found on my own. My calendar filled up fast.",
+      "name": "Rachel Howe",
+      "title": "Chief Marketing Officer"
+    },
+    {
+      "id": "t2",
+      "quote": "We needed a keynote speaker in 48 hours. Speakify found us three perfect matches before lunch.",
+      "name": "James Okafor",
+      "title": "Head of Events, NovaTech"
+    },
+    {
+      "id": "t3",
+      "quote": "The quality of speakers on Speakify is unmatched. Every booking has felt like a perfect fit.",
+      "name": "Lina Park",
+      "title": "Founder, BrightStage Events"
+    },
+    {
+      "id": "t4",
+      "quote": "From shortlist to signed contract in under a week. This is how speaker booking should work.",
+      "name": "Tom Whitfield",
+      "title": "Director of Operations"
+    }
+  ],
+
   "speakers": [
     {
       "id": "s1",

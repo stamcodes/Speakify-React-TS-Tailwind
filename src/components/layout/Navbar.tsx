@@ -9,7 +9,8 @@ interface NavbarProps {
 }
 
 function Navbar({ role = "guest", end }: NavbarProps) {
-  const links = NAV_LINKS[role];
+  const isAuth = role === "auth";
+  const links = isAuth ? [] : NAV_LINKS[role];
 
   return (
     <nav className="absolute top-0 left-0 w-full h-16 flex items-center z-10 px-12 pt-6">
@@ -17,19 +18,23 @@ function Navbar({ role = "guest", end }: NavbarProps) {
         <img src="/images/SpeakifyLogoDark.png" alt="Speakify" />
       </Link>
 
-      <div className="flex gap-6 text-sm font-normal text-grey">
-        {links.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            className="hover:text-heading transition-colors"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
+      {!isAuth && (
+        <>
+          <div className="flex gap-6 text-sm font-normal text-grey">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="hover:text-heading transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-      <div className="flex items-center ml-auto px-4">{end}</div>
+          <div className="flex items-center ml-auto px-4">{end}</div>
+        </>
+      )}
     </nav>
   );
 }
