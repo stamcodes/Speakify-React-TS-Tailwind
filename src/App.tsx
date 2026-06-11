@@ -36,7 +36,7 @@ function App() {
         Use SpeakerCard with distinct values....  */}
         <div className="relative flex-1 rounded-3xl overflow-hidden mt-3">
           <img
-            src="images/hero-img-home.png"
+            src="/images/hero-img-home.png"
             alt="Speaker on stage"
             className="w-full h-full object-cover"
           />

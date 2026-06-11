@@ -21,7 +21,7 @@ function TestimonialCard() {
   if (!testimonial) return null;
 
   return (
-    <div className="bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-6 max-w-md shadow-sm">
+    <div className="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm max-w-md">
       <p className="text-lg font-bold text-heading leading-snug mb-4">
         {testimonial.quote}
       </p>
