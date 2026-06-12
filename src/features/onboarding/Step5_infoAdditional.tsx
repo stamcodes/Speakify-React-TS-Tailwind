@@ -24,12 +24,7 @@ type FieldName =
   | "preferredAudienceSize";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-function Step5_infoAdditional({
-  data,
-  updateData,
-  onNext,
-  onBack,
-}: Step5Props) {
+function Step5_infoAdditional({ data, updateData, onBack }: Step5Props) {
   const navigate = useNavigate();
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
