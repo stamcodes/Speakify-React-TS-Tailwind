@@ -1,5 +1,7 @@
 // src/features/onboarding/onboardingTypes.ts
 
+// --- Core Interfaces ---
+
 export interface VideoItem {
   id: string;
   name: string;
@@ -43,6 +45,21 @@ export interface OnboardingData {
   preferredAudienceSize?: string;
 }
 
+// --- Reusable Props for Step Components ---
+
+/**
+ * Shared interface for all Onboarding Step components.
+ * Import this into your Step1_Profile, Step2_Topics, etc.
+ */
+export interface StepProps {
+  data: OnboardingData;
+  updateData: (fields: Partial<OnboardingData>) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+// --- Initial State ---
+
 export const initialOnboardingData: OnboardingData = {
   accountType: "speaker",
   email: "",
@@ -56,7 +73,7 @@ export const initialOnboardingData: OnboardingData = {
   videos: [],
   categories: [],
 
-  // Default values retained for Step 4
+  // Default values for Step 4
   pricingTiers: [
     { id: "1", region: "UK", currency: "£", fee: "7500", travelIncluded: true },
     {
@@ -75,7 +92,7 @@ export const initialOnboardingData: OnboardingData = {
     },
   ],
 
-  // Default values retained for Step 5
+  // Default values for Step 5
   languages: [
     {
       id: "l1",
