@@ -1,7 +1,7 @@
 // src/features/onboarding/Step5_infoAdditional.tsx
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Plus, Trash2, ChevronDown, X, Zap } from "lucide-react";
+import { Plus, Trash2, ChevronDown, X } from "lucide-react";
 import Navbar from "../../components/layout/Navbar";
 import OnboardingStepCounter from "../../components/Modules/OnboardingStepCounter";
 import type { KeyboardEvent } from "react";
@@ -15,6 +15,15 @@ interface Step5Props {
   onBack: () => void;
 }
 
+type FieldName =
+  | "languages"
+  | "yearsOfExperience"
+  | "speakingStyle"
+  | "speakerTypes"
+  | "specialisedIndustries"
+  | "preferredAudienceSize";
+type FieldErrors = Partial<Record<FieldName, string>>;
+
 function Step5_infoAdditional({
   data,
   updateData,
@@ -22,8 +31,8 @@ function Step5_infoAdditional({
   onBack,
 }: Step5Props) {
   const navigate = useNavigate();
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
-  // Load baseline arrays from local configuration data registries
   const [regionLanguages] = useState<string[]>(
     dataJson.availableLanguages || ["English", "Spanish", "French", "German"],
   );
@@ -39,8 +48,6 @@ function Step5_infoAdditional({
   const [audienceOptions] = useState<string[]>(
     dataJson.availableAudienceSizes || ["Up to 500"],
   );
-
-  // Dynamic lists capable of being extended via typing custom entries
   const [typeOptions, setTypeOptions] = useState<string[]>(
     dataJson.availableSpeakerTypes || ["Keynote Speaker", "Moderator"],
   );
@@ -48,40 +55,28 @@ function Step5_infoAdditional({
     dataJson.availableIndustries || ["Finance", "E-commerce"],
   );
 
-  // Search/Input state strings
   const [typeInput, setTypeInput] = useState("");
   const [industryInput, setIndustryInput] = useState("");
 
-  // Safely extract active values from central schema state
-  const languages: LanguageRow[] =
-    data.languages && data.languages.length > 0
-      ? data.languages
-      : [
-          {
-            id: "l1",
-            language: "English",
-            proficiency: "Full professional proficiency",
-          },
-          { id: "l2", language: "Spanish", proficiency: "Native proficiency" },
-        ];
-
-  const yearsOfExperience = data.yearsOfExperience || "10";
-  const speakingStyle = data.speakingStyle || "Motivational";
-  const speakerTypes = data.speakerTypes || ["Keynote Speaker", "Moderator"];
-  const specialisedIndustries = data.specialisedIndustries || [
-    "Finance",
-    "E-commerce",
+  const languages: LanguageRow[] = data.languages || [
+    {
+      id: "l1",
+      language: "English",
+      proficiency: "Full professional proficiency",
+    },
   ];
-  const eventsSpokenAt = data.eventsSpokenAt || "200";
-  const preferredAudienceSize = data.preferredAudienceSize || "Up to 500";
+  const yearsOfExperience = data.yearsOfExperience || "";
+  const speakingStyle = data.speakingStyle || "";
+  const speakerTypes = data.speakerTypes || [];
+  const specialisedIndustries = data.specialisedIndustries || [];
+  const eventsSpokenAt = data.eventsSpokenAt || "";
+  const preferredAudienceSize = data.preferredAudienceSize || "";
 
   const [activeMenu, setActiveMenu] = useState<{
     id: string;
     field: string;
   } | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // References to handle container-click focus redirects
   const typeInputRef = useRef<HTMLInputElement | null>(null);
   const industryInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -98,18 +93,58 @@ function Step5_infoAdditional({
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
+  const validateField = (field: FieldName): string | null => {
+    switch (field) {
+      case "languages":
+        return languages.length === 0
+          ? "Please add at least one language"
+          : null;
+      case "yearsOfExperience":
+        return !yearsOfExperience.trim()
+          ? "Please enter your years of experience"
+          : null;
+      case "speakingStyle":
+        return !speakingStyle ? "Please select a speaking style" : null;
+      case "speakerTypes":
+        return speakerTypes.length === 0
+          ? "Please select at least one speaker type"
+          : null;
+      case "specialisedIndustries":
+        return specialisedIndustries.length === 0
+          ? "Please select at least one industry"
+          : null;
+      case "preferredAudienceSize":
+        return !preferredAudienceSize
+          ? "Please select a preferred audience size"
+          : null;
+      default:
+        return null;
+    }
+  };
+
+  const handleBlur = (field: FieldName) => {
+    const message = validateField(field);
+    setFieldErrors((prev) => ({ ...prev, [field]: message ?? undefined }));
+  };
+
+  const clearFieldError = (field: FieldName) => {
+    if (fieldErrors[field])
+      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
   const handleUpdateLanguage = (id: string, updates: Partial<LanguageRow>) => {
     const updated = languages.map((row) =>
       row.id === id ? { ...row, ...updates } : row,
     );
     updateData({ languages: updated });
+    clearFieldError("languages");
   };
 
   const handleAddLanguageRow = () => {
     const newRow: LanguageRow = {
       id: crypto.randomUUID(),
-      language: regionLanguages[0] || "English",
-      proficiency: proficiencies[0] || "Native proficiency",
+      language: regionLanguages[0],
+      proficiency: proficiencies[0],
     };
     updateData({ languages: [...languages, newRow] });
   };
@@ -117,7 +152,6 @@ function Step5_infoAdditional({
   const handleRemoveLanguageRow = (id: string) => {
     if (languages.length === 1) return;
     updateData({ languages: languages.filter((row) => row.id !== id) });
-    if (activeMenu?.id === id) setActiveMenu(null);
   };
 
   const handleToggleMultiSelect = (
@@ -129,56 +163,69 @@ function Step5_infoAdditional({
       ? currentList.filter((x) => x !== item)
       : [...currentList, item];
     updateData({ [dataKey]: updated });
+    clearFieldError(dataKey as FieldName);
   };
 
-  // Handles dynamic expansion of categories inside state array lists upon hitting Enter
   const handleCustomInputKeyDown = (
     e: KeyboardEvent<HTMLInputElement>,
     inputValue: string,
-    setInputValue: React.Dispatch<React.SetStateAction<string>>,
+    setInputValue: any,
     optionsList: string[],
-    setOptionsList: React.Dispatch<React.SetStateAction<string[]>>,
+    setOptionsList: any,
     currentSelection: string[],
     dataKey: "speakerTypes" | "specialisedIndustries",
   ) => {
     if (e.key === "Enter" && inputValue.trim()) {
       e.preventDefault();
       const newItem = inputValue.trim();
-
       if (
         !optionsList.some((opt) => opt.toLowerCase() === newItem.toLowerCase())
-      ) {
-        setOptionsList((prev) => [...prev, newItem]);
-      }
-
+      )
+        setOptionsList((prev: any) => [...prev, newItem]);
       if (
-        !currentSelection.some(
-          (selected) => selected.toLowerCase() === newItem.toLowerCase(),
-        )
-      ) {
+        !currentSelection.some((s) => s.toLowerCase() === newItem.toLowerCase())
+      )
         updateData({ [dataKey]: [...currentSelection, newItem] });
-      }
-
       setInputValue("");
+      clearFieldError(dataKey as FieldName);
     }
   };
 
-  // Redirect users back to the authentication screen layout
   const handleFinishProfile = () => {
-    navigate("/authentication"); // Verified target path setup
+    const fieldsToValidate: FieldName[] = [
+      "languages",
+      "yearsOfExperience",
+      "speakingStyle",
+      "speakerTypes",
+      "specialisedIndustries",
+      "preferredAudienceSize",
+    ];
+    const newErrors: FieldErrors = {};
+    fieldsToValidate.forEach((field) => {
+      const message = validateField(field);
+      if (message) newErrors[field] = message;
+    });
+    setFieldErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) navigate("/authentication");
   };
+
+  // shared classes
+  const dropdownPanelClass = (open: boolean) =>
+    `absolute left-0 right-0 mt-1 bg-white rounded-xl shadow-lg z-30 max-h-40 overflow-y-auto origin-top transition-all duration-200 ease-out ${
+      open
+        ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
+        : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none"
+    }`;
 
   return (
     <div>
       <Navbar role="auth" />
       <div className="animate-fade-slide-up">
         <OnboardingStepCounter activeStep={5} />
-
         <div
           className="max-w-xl mx-auto px-6 py-8 select-none"
           ref={containerRef}
         >
-          {/* Languages Section */}
           <div className="mb-8">
             <label className="block text-sm font-medium text-stone-700 mb-3">
               Languages *
@@ -200,7 +247,7 @@ function Step5_infoAdditional({
                             : { id: row.id, field: "lang" },
                         )
                       }
-                      className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs border border-transparent focus:outline-none"
+                      className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs outline-none focus:outline-none"
                     >
                       <span>{row.language}</span>
                       <ChevronDown
@@ -208,26 +255,27 @@ function Step5_infoAdditional({
                         className={`text-stone-500 transition-transform ${activeMenu?.id === row.id && activeMenu.field === "lang" ? "rotate-180" : ""}`}
                       />
                     </button>
-                    {activeMenu?.id === row.id &&
-                      activeMenu.field === "lang" && (
-                        <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 max-h-40 overflow-y-auto custom-scrollbar animate-dropdown-slide origin-top">
-                          {regionLanguages.map((l) => (
-                            <button
-                              key={l}
-                              type="button"
-                              onClick={() => {
-                                handleUpdateLanguage(row.id, { language: l });
-                                setActiveMenu(null);
-                              }}
-                              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 ${row.language === l ? "bg-stone-50 font-semibold" : ""}`}
-                            >
-                              {l}
-                            </button>
-                          ))}
-                        </div>
+                    <div
+                      className={dropdownPanelClass(
+                        activeMenu?.id === row.id &&
+                          activeMenu.field === "lang",
                       )}
+                    >
+                      {regionLanguages.map((l) => (
+                        <button
+                          key={l}
+                          type="button"
+                          onClick={() => {
+                            handleUpdateLanguage(row.id, { language: l });
+                            setActiveMenu(null);
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                        >
+                          {l}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-
                   <div className="relative">
                     <button
                       type="button"
@@ -239,7 +287,7 @@ function Step5_infoAdditional({
                             : { id: row.id, field: "prof" },
                         )
                       }
-                      className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs border border-transparent focus:outline-none"
+                      className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs outline-none focus:outline-none"
                     >
                       <span className="truncate">{row.proficiency}</span>
                       <ChevronDown
@@ -247,79 +295,79 @@ function Step5_infoAdditional({
                         className={`text-stone-500 transition-transform ${activeMenu?.id === row.id && activeMenu.field === "prof" ? "rotate-180" : ""}`}
                       />
                     </button>
-                    {activeMenu?.id === row.id &&
-                      activeMenu.field === "prof" && (
-                        <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 max-h-40 overflow-y-auto custom-scrollbar animate-dropdown-slide origin-top">
-                          {proficiencies.map((p) => (
-                            <button
-                              key={p}
-                              type="button"
-                              onClick={() => {
-                                handleUpdateLanguage(row.id, {
-                                  proficiency: p,
-                                });
-                                setActiveMenu(null);
-                              }}
-                              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 ${row.proficiency === p ? "bg-stone-50 font-semibold" : ""}`}
-                            >
-                              {p}
-                            </button>
-                          ))}
-                        </div>
+                    <div
+                      className={dropdownPanelClass(
+                        activeMenu?.id === row.id &&
+                          activeMenu.field === "prof",
                       )}
+                    >
+                      {proficiencies.map((p) => (
+                        <button
+                          key={p}
+                          type="button"
+                          onClick={() => {
+                            handleUpdateLanguage(row.id, {
+                              proficiency: p,
+                            });
+                            setActiveMenu(null);
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-
                   <button
                     type="button"
                     disabled={languages.length === 1}
                     onClick={() => handleRemoveLanguageRow(row.id)}
-                    className={`p-2 rounded-lg transition-colors ${languages.length === 1 ? "text-stone-300 cursor-not-allowed" : "text-stone-400 hover:text-red-500 hover:bg-stone-900/5 cursor-pointer"}`}
+                    className="p-2 text-red-500 disabled:text-stone-300 outline-none focus:outline-none"
                   >
-                    <Trash2
-                      size={15}
-                      className={languages.length > 1 ? "text-red-500/80" : ""}
-                    />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               ))}
             </div>
-
-            <div className="mt-3">
-              <button
-                type="button"
-                onClick={handleAddLanguageRow}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-transparent border border-stone-900/15 text-stone-700 hover:text-heading hover:border-stone-900/30 text-xs font-medium rounded-full shadow-2xs hover:bg-stone-900/5 transition-all cursor-pointer"
-              >
-                <Plus size={12} className="stroke-[2.5]" />
-                Add language
-              </button>
-            </div>
+            {fieldErrors.languages && (
+              <p className="mt-2 text-xs text-red-500">
+                {fieldErrors.languages}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={handleAddLanguageRow}
+              className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 border border-stone-900/15 text-xs font-medium rounded-full hover:bg-stone-900/5 outline-none focus:outline-none"
+            >
+              <Plus size={12} /> Add language
+            </button>
           </div>
 
-          <h2 className="text-base font-semibold text-heading mb-4 mt-8">
-            Your speaker career
-          </h2>
-
-          {/* Experience + Style */}
           <div className="grid grid-cols-2 gap-4 mb-5">
             <div>
-              <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
+              <label className="block text-xs font-medium text-stone-600 mb-1.5">
                 Years of experience *
               </label>
               <input
                 type="text"
                 value={yearsOfExperience}
-                onChange={(e) =>
+                onChange={(e) => {
                   updateData({
                     yearsOfExperience: e.target.value.replace(/[^0-9]/g, ""),
-                  })
-                }
-                className="w-full px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs focus:outline-none"
+                  });
+                  clearFieldError("yearsOfExperience");
+                }}
+                onBlur={() => handleBlur("yearsOfExperience")}
+                className={`w-full px-4 py-3 bg-white text-sm rounded-xl outline-none focus:outline-none ${fieldErrors.yearsOfExperience ? "ring-1 ring-red-500" : ""}`}
               />
+              {fieldErrors.yearsOfExperience && (
+                <p className="mt-1 text-xs text-red-500">
+                  {fieldErrors.yearsOfExperience}
+                </p>
+              )}
             </div>
-
             <div className="relative">
-              <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
+              <label className="block text-xs font-medium text-stone-600 mb-1.5">
                 Your speaking style *
               </label>
               <button
@@ -331,37 +379,42 @@ function Step5_infoAdditional({
                       : { id: "global", field: "style" },
                   )
                 }
-                className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs focus:outline-none"
+                className={`w-full flex items-center justify-between px-4 py-3 bg-white text-sm rounded-xl outline-none focus:outline-none ${fieldErrors.speakingStyle ? "ring-1 ring-red-500" : ""}`}
               >
-                <span>{speakingStyle}</span>
+                <span>{speakingStyle || "Select a speaking style"}</span>
                 <ChevronDown
                   size={14}
-                  className={`text-stone-500 transition-transform ${activeMenu?.field === "style" ? "rotate-180" : ""}`}
+                  className={`transition-transform ${activeMenu?.field === "style" ? "rotate-180" : ""}`}
                 />
               </button>
-              {activeMenu?.field === "style" && (
-                <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 animate-dropdown-slide origin-top">
-                  {styleOptions.map((st) => (
-                    <button
-                      key={st}
-                      type="button"
-                      onClick={() => {
-                        updateData({ speakingStyle: st });
-                        setActiveMenu(null);
-                      }}
-                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 ${speakingStyle === st ? "bg-stone-50 font-semibold" : ""}`}
-                    >
-                      {st}
-                    </button>
-                  ))}
-                </div>
+              <div
+                className={dropdownPanelClass(activeMenu?.field === "style")}
+              >
+                {styleOptions.map((st) => (
+                  <button
+                    key={st}
+                    type="button"
+                    onClick={() => {
+                      updateData({ speakingStyle: st });
+                      setActiveMenu(null);
+                      clearFieldError("speakingStyle");
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                  >
+                    {st}
+                  </button>
+                ))}
+              </div>
+              {fieldErrors.speakingStyle && (
+                <p className="mt-1 text-xs text-red-500">
+                  {fieldErrors.speakingStyle}
+                </p>
               )}
             </div>
           </div>
 
-          {/* Speaker Types */}
           <div className="mb-5 relative">
-            <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
+            <label className="block text-xs font-medium text-stone-600 mb-1.5">
               What type of speaker are you? *
             </label>
             <div
@@ -369,18 +422,17 @@ function Step5_infoAdditional({
                 setActiveMenu({ id: "global", field: "types" });
                 typeInputRef.current?.focus();
               }}
-              className="w-full flex items-center justify-between min-h-[46px] p-2 bg-white rounded-xl shadow-2xs cursor-pointer border border-transparent"
+              className={`w-full min-h-[46px] p-2 bg-white rounded-xl outline-none focus:outline-none ${fieldErrors.speakerTypes ? "ring-1 ring-red-500" : ""}`}
             >
-              <div className="flex flex-wrap items-center gap-1.5 flex-1">
+              <div className="flex flex-wrap items-center gap-1.5">
                 {speakerTypes.map((t) => (
                   <span
                     key={t}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-transparent border border-stone-200 text-xs font-medium text-stone-700 rounded-md"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-stone-100 rounded-md text-xs"
                   >
-                    {t}
+                    {t}{" "}
                     <X
                       size={11}
-                      className="text-stone-400 hover:text-stone-600 cursor-pointer animate-fade-in"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleToggleMultiSelect(
@@ -394,7 +446,6 @@ function Step5_infoAdditional({
                 ))}
                 <input
                   ref={typeInputRef}
-                  type="text"
                   value={typeInput}
                   onChange={(e) => setTypeInput(e.target.value)}
                   onKeyDown={(e) =>
@@ -408,74 +459,62 @@ function Step5_infoAdditional({
                       "speakerTypes",
                     )
                   }
-                  onFocus={() =>
-                    setActiveMenu({ id: "global", field: "types" })
-                  }
-                  className="inline-block min-w-[60px] flex-1 bg-transparent text-sm font-medium text-heading focus:outline-none p-0.5"
+                  className="flex-1 bg-transparent text-sm p-1 outline-none focus:outline-none"
                 />
               </div>
-              <ChevronDown
-                size={14}
-                className={`text-stone-500 shrink-0 ml-2 transition-transform ${activeMenu?.field === "types" ? "rotate-180" : ""}`}
-              />
             </div>
-
-            {activeMenu?.field === "types" && (
-              <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 animate-dropdown-slide origin-top max-h-44 overflow-y-auto custom-scrollbar">
-                {typeOptions
-                  .filter((opt) =>
-                    opt.toLowerCase().includes(typeInput.toLowerCase()),
-                  )
-                  .map((opt) => (
-                    <button
-                      key={opt}
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleMultiSelect(
-                          opt,
-                          speakerTypes,
-                          "speakerTypes",
-                        );
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-stone-50 ${speakerTypes.includes(opt) ? "bg-stone-50/70 font-semibold text-heading" : "text-stone-600"}`}
-                    >
-                      {opt} {speakerTypes.includes(opt) && "✓"}
-                    </button>
-                  ))}
-              </div>
+            <div className={dropdownPanelClass(activeMenu?.field === "types")}>
+              {typeOptions
+                .filter((opt) => !speakerTypes.includes(opt))
+                .map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => {
+                      handleToggleMultiSelect(
+                        opt,
+                        speakerTypes,
+                        "speakerTypes",
+                      );
+                      typeInputRef.current?.focus();
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                  >
+                    {opt}
+                  </button>
+                ))}
+            </div>
+            {fieldErrors.speakerTypes && (
+              <p className="mt-1 text-xs text-red-500">
+                {fieldErrors.speakerTypes}
+              </p>
             )}
-            <span className="block text-[11px] text-stone-400 mt-1.5 pl-0.5">
-              You can select more than one option
-            </span>
           </div>
 
-          {/* Specialised Industries */}
           <div className="mb-5 relative">
-            <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
-              Which industries do you specialise in?
+            <label className="block text-xs font-medium text-stone-600 mb-1.5">
+              Specialised industries *
             </label>
             <div
               onClick={() => {
                 setActiveMenu({ id: "global", field: "industries" });
                 industryInputRef.current?.focus();
               }}
-              className="w-full flex items-center justify-between min-h-[46px] p-2 bg-white rounded-xl shadow-2xs cursor-pointer border border-transparent"
+              className={`w-full min-h-[46px] p-2 bg-white rounded-xl outline-none focus:outline-none ${fieldErrors.specialisedIndustries ? "ring-1 ring-red-500" : ""}`}
             >
-              <div className="flex flex-wrap items-center gap-1.5 flex-1">
-                {specialisedIndustries.map((ind) => (
+              <div className="flex flex-wrap items-center gap-1.5">
+                {specialisedIndustries.map((t) => (
                   <span
-                    key={ind}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-transparent border border-stone-200 text-xs font-medium text-stone-700 rounded-md"
+                    key={t}
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-stone-100 rounded-md text-xs"
                   >
-                    {ind}
+                    {t}{" "}
                     <X
                       size={11}
-                      className="text-stone-400 hover:text-stone-600 cursor-pointer animate-fade-in"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleToggleMultiSelect(
-                          ind,
+                          t,
                           specialisedIndustries,
                           "specialisedIndustries",
                         );
@@ -485,7 +524,6 @@ function Step5_infoAdditional({
                 ))}
                 <input
                   ref={industryInputRef}
-                  type="text"
                   value={industryInput}
                   onChange={(e) => setIndustryInput(e.target.value)}
                   onKeyDown={(e) =>
@@ -499,53 +537,44 @@ function Step5_infoAdditional({
                       "specialisedIndustries",
                     )
                   }
-                  onFocus={() =>
-                    setActiveMenu({ id: "global", field: "industries" })
-                  }
-                  className="inline-block min-w-[60px] flex-1 bg-transparent text-sm font-medium text-heading focus:outline-none p-0.5"
+                  className="flex-1 bg-transparent text-sm p-1 outline-none focus:outline-none"
                 />
               </div>
-              <ChevronDown
-                size={14}
-                className={`text-stone-500 shrink-0 ml-2 transition-transform ${activeMenu?.field === "industries" ? "rotate-180" : ""}`}
-              />
             </div>
-
-            {activeMenu?.field === "industries" && (
-              <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 animate-dropdown-slide origin-top max-h-44 overflow-y-auto custom-scrollbar">
-                {industryOptions
-                  .filter((opt) =>
-                    opt.toLowerCase().includes(industryInput.toLowerCase()),
-                  )
-                  .map((opt) => (
-                    <button
-                      key={opt}
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleMultiSelect(
-                          opt,
-                          specialisedIndustries,
-                          "specialisedIndustries",
-                        );
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-stone-50 ${specialisedIndustries.includes(opt) ? "bg-stone-50/70 font-semibold text-heading" : "text-stone-600"}`}
-                    >
-                      {opt} {specialisedIndustries.includes(opt) && "✓"}
-                    </button>
-                  ))}
-              </div>
+            <div
+              className={dropdownPanelClass(activeMenu?.field === "industries")}
+            >
+              {industryOptions
+                .filter((opt) => !specialisedIndustries.includes(opt))
+                .map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => {
+                      handleToggleMultiSelect(
+                        opt,
+                        specialisedIndustries,
+                        "specialisedIndustries",
+                      );
+                      industryInputRef.current?.focus();
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                  >
+                    {opt}
+                  </button>
+                ))}
+            </div>
+            {fieldErrors.specialisedIndustries && (
+              <p className="mt-1 text-xs text-red-500">
+                {fieldErrors.specialisedIndustries}
+              </p>
             )}
-            <span className="block text-[11px] text-stone-400 mt-1.5 pl-0.5">
-              You can select more than one option
-            </span>
           </div>
 
-          {/* Events Spoken At + Audience Size */}
           <div className="grid grid-cols-2 gap-4 mb-12">
             <div>
-              <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
-                How many events have you spoken at?
+              <label className="block text-xs font-medium text-stone-600 mb-1.5">
+                How many events?
               </label>
               <input
                 type="text"
@@ -555,13 +584,13 @@ function Step5_infoAdditional({
                     eventsSpokenAt: e.target.value.replace(/[^0-9]/g, ""),
                   })
                 }
-                className="w-full px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs focus:outline-none"
+                placeholder="e.g. 200"
+                className="w-full px-4 py-3 bg-white text-sm rounded-xl outline-none focus:outline-none"
               />
             </div>
-
             <div className="relative">
-              <label className="block text-xs font-medium text-stone-600/90 mb-1.5">
-                What's your preferred audience size?
+              <label className="block text-xs font-medium text-stone-600 mb-1.5">
+                Preferred audience size *
               </label>
               <button
                 type="button"
@@ -572,49 +601,52 @@ function Step5_infoAdditional({
                       : { id: "global", field: "audSize" },
                   )
                 }
-                className="w-full flex items-center justify-between px-4 py-3 bg-white text-sm font-medium text-heading rounded-xl shadow-2xs focus:outline-none"
+                className={`w-full flex items-center justify-between px-4 py-3 bg-white text-sm rounded-xl outline-none focus:outline-none ${fieldErrors.preferredAudienceSize ? "ring-1 ring-red-500" : ""}`}
               >
-                <span>{preferredAudienceSize}</span>
+                <span>{preferredAudienceSize || "Select audience size"}</span>
                 <ChevronDown
                   size={14}
-                  className={`text-stone-500 transition-transform ${activeMenu?.field === "audSize" ? "rotate-180" : ""}`}
+                  className={`transition-transform ${activeMenu?.field === "audSize" ? "rotate-180" : ""}`}
                 />
               </button>
-              {activeMenu?.field === "audSize" && (
-                <div className="absolute left-0 right-0 mt-1 bg-white border border-stone-200 rounded-xl shadow-lg z-30 animate-dropdown-slide origin-top">
-                  {audienceOptions.map((size) => (
-                    <button
-                      key={size}
-                      type="button"
-                      onClick={() => {
-                        updateData({ preferredAudienceSize: size });
-                        setActiveMenu(null);
-                      }}
-                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-stone-50 ${preferredAudienceSize === size ? "bg-stone-50 font-semibold" : ""}`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
+              <div
+                className={dropdownPanelClass(activeMenu?.field === "audSize")}
+              >
+                {audienceOptions.map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => {
+                      updateData({ preferredAudienceSize: a });
+                      setActiveMenu(null);
+                      clearFieldError("preferredAudienceSize");
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-stone-50 outline-none focus:outline-none"
+                  >
+                    {a}
+                  </button>
+                ))}
+              </div>
+              {fieldErrors.preferredAudienceSize && (
+                <p className="mt-1 text-xs text-red-500">
+                  {fieldErrors.preferredAudienceSize}
+                </p>
               )}
             </div>
           </div>
 
-          {/* Action Footer Navigation Control Blocks */}
-          <div className="flex justify-between border-t border-stone-900/10 pt-6">
+          <div className="flex justify-between pt-6">
             <button
               onClick={onBack}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-heading bg-white/60 hover:bg-white/80 transition-colors border border-stone-900/5 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl text-sm font-medium bg-white/60 outline-none focus:outline-none"
             >
-              <ArrowLeft size={16} />
               Back
             </button>
             <button
               onClick={handleFinishProfile}
-              className="flex items-center gap-2 px-5 py-2.5 bg-white text-heading hover:bg-stone-50 text-sm font-medium rounded-xl shadow-sm transition-all border border-stone-900/10 cursor-pointer"
+              className="px-5 py-2.5 bg-white text-sm font-medium rounded-xl shadow-sm outline-none focus:outline-none"
             >
               Finish and create profile
-              <Zap size={14} className="fill-heading stroke-none" />
             </button>
           </div>
         </div>
