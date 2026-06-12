@@ -1,5 +1,4 @@
 // src/features/onboarding/onboardingTypes.ts
-
 export interface VideoItem {
   id: string;
   name: string;
@@ -18,6 +17,7 @@ export interface OnboardingData {
   profilePicture: File | null;
   videoMethod: "upload" | "link";
   videos: VideoItem[];
+  categories: string[];
 }
 
 export const initialOnboardingData: OnboardingData = {
@@ -31,4 +31,5 @@ export const initialOnboardingData: OnboardingData = {
   profilePicture: null,
   videoMethod: "upload",
   videos: [],
+  categories: [],
 };

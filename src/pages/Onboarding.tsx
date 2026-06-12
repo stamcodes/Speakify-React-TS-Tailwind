@@ -59,7 +59,14 @@ function Onboarding() {
                 />
               );
             case 3:
-              return <Step3_Pricing onNext={goNext} onBack={goBack} />;
+              return (
+                <Step3_Pricing
+                  data={data}
+                  updateData={updateData}
+                  onNext={goNext}
+                  onBack={goBack}
+                />
+              ); // 👈 Fixed: Passed down data and updateData hooks
             case 4:
               return <Step4_Availability onNext={goNext} onBack={goBack} />;
             case 5:

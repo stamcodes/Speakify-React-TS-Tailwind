@@ -187,5 +187,31 @@
       "question": "Why list as a speaker on Speakify?",
       "answer": "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place."
     }
+  ],
+
+  "categories": [
+    "Generative AI & Tech",
+    "Leadership & Scaling",
+    "FinTech & Web3",
+    "UI/UX & Product Design",
+    "Workplace Culture",
+    "Artificial Intelligence",
+    "Future of Work",
+    "Mental Health & Wellbeing",
+    "Diversity & Inclusion",
+    "Sustainability & ESG",
+    "Economics & Geopolitics",
+    "Cybersecurity",
+    "Sales & Negotiation",
+    "Marketing & Branding",
+    "Creativity & Innovation",
+    "Emotional Intelligence",
+    "Healthcare & Biotech",
+    "Blockchain & Web3",
+    "Personal Development",
+    "Customer Experience",
+    "Risk Management",
+    "Venture Capital",
+    "Data Science & Analytics"
   ]
 }
