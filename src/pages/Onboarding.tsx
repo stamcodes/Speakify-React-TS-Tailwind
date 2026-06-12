@@ -66,11 +66,25 @@ function Onboarding() {
                   onNext={goNext}
                   onBack={goBack}
                 />
-              ); // 👈 Fixed: Passed down data and updateData hooks
+              );
             case 4:
-              return <Step4_Availability onNext={goNext} onBack={goBack} />;
+              return (
+                <Step4_Availability
+                  data={data}
+                  updateData={updateData}
+                  onNext={goNext}
+                  onBack={goBack}
+                />
+              );
             case 5:
-              return <Step5_Bio onNext={goNext} onBack={goBack} />;
+              return (
+                <Step5_Bio
+                  data={data}
+                  updateData={updateData}
+                  onNext={handleFinish}
+                  onBack={goBack}
+                />
+              );
 
             default:
               return (

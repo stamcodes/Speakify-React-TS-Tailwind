@@ -51,7 +51,6 @@
       "budget": 5000
     }
   ],
-
   "brands": [
     { "id": "br1", "name": "Microsoft", "logo": "/images/Microsoft.png" },
     { "id": "br2", "name": "Tesco", "logo": "/images/tesco.png" },
@@ -60,7 +59,6 @@
     { "id": "br5", "name": "Coca-Cola", "logo": "/images/cocacola.png" },
     { "id": "br6", "name": "Google", "logo": "/images/Google.png" }
   ],
-
   "testimonials": [
     {
       "id": "t1",
@@ -87,7 +85,6 @@
       "title": "Director of Operations"
     }
   ],
-
   "speakers": [
     {
       "id": "s1",
@@ -165,7 +162,6 @@
       "availability": "Pending Approval"
     }
   ],
-
   "faq": [
     {
       "id": "faq1",
@@ -188,7 +184,6 @@
       "answer": "Get discovered by event organisers actively looking for speakers in your niche. Manage bookings, set your fees, and grow your speaking business in one place."
     }
   ],
-
   "categories": [
     "Generative AI & Tech",
     "Leadership & Scaling",
@@ -213,5 +208,43 @@
     "Risk Management",
     "Venture Capital",
     "Data Science & Analytics"
-  ]
+  ],
+  "availableRegions": ["UK", "EU", "US", "CA", "AU", "Global"],
+  "availableCurrencies": ["£", "€", "$", "¥"],
+  "availableLanguages": [
+    "English",
+    "Spanish",
+    "French",
+    "German",
+    "Mandarin",
+    "Arabic"
+  ],
+  "availableProficiencies": [
+    "Full professional proficiency",
+    "Native proficiency",
+    "Professional working proficiency",
+    "Limited working proficiency"
+  ],
+  "availableSpeakerStyles": [
+    "Motivational",
+    "Educational",
+    "Storyteller",
+    "Technical / Analytical",
+    "Entertaining"
+  ],
+  "availableSpeakerTypes": [
+    "Keynote Speaker",
+    "Moderator",
+    "Panelist",
+    "Workshop Facilitator"
+  ],
+  "availableIndustries": [
+    "Finance",
+    "E-commerce",
+    "Technology",
+    "Healthcare",
+    "Education",
+    "Entertainment"
+  ],
+  "availableAudienceSizes": ["Up to 100", "Up to 500", "Up to 2,000", "2,000+"]
 }
