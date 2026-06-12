@@ -1,5 +1,6 @@
 // AuthFields.tsx
 import { useState } from "react";
+import Toggle from "../../../components/UI/Toggle";
 
 type AuthMode = "login" | "signup";
 
@@ -26,25 +27,16 @@ function AuthFields({ email, setEmail, onSubmit }: AuthFieldsProps) {
         `}
       </style>
 
-      {/* Toggle */}
-      <div className="flex bg-[#f4ece4] rounded-full p-1 mb-8">
-        <button
-          onClick={() => setMode("login")}
-          className={`flex-1 text-sm font-medium py-2 rounded-full transition-colors ${
-            mode === "login" ? "bg-white text-heading shadow-sm" : "text-grey"
-          }`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => setMode("signup")}
-          className={`flex-1 text-sm font-medium py-2 rounded-full transition-colors ${
-            mode === "signup" ? "bg-white text-heading shadow-sm" : "text-grey"
-          }`}
-        >
-          Sign Up
-        </button>
-      </div>
+      {/* Reusable Toggle Component Call */}
+      <Toggle<AuthMode>
+        leftLabel="Login"
+        leftValue="login"
+        rightLabel="Sign Up"
+        rightValue="signup"
+        value={mode}
+        onChange={setMode}
+        className="mb-8"
+      />
 
       {/* Heading + body — fades on mode change */}
       <div key={mode} className="fade-in">
@@ -130,7 +122,7 @@ function AuthFields({ email, setEmail, onSubmit }: AuthFieldsProps) {
             Already have an account?{" "}
             <button
               onClick={() => setMode("login")}
-              className="text-heading underline underline-offset-2"
+              className="text-heading underline underline-offset-2 cursor-pointer"
             >
               Log in
             </button>
@@ -140,7 +132,7 @@ function AuthFields({ email, setEmail, onSubmit }: AuthFieldsProps) {
             Don't have an account?{" "}
             <button
               onClick={() => setMode("signup")}
-              className="text-heading underline underline-offset-2"
+              className="text-heading underline underline-offset-2 cursor-pointer"
             >
               Sign up
             </button>

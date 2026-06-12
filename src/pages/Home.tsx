@@ -13,7 +13,7 @@ import Data from "../data/Data.json";
 
 function App() {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative animate-fade-slide-up">
       <Navbar role="guest" end={<GuestActions />} />
 
       {/* Hero Section */}

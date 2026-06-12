@@ -15,20 +15,22 @@ function Step2_Topics({ onNext, onBack }: Step2Props) {
   return (
     <div>
       <Navbar role="auth" />
-      <OnboardingStepCounter activeStep={2} />
+      <div className="animate-fade-slide-up">
+        <OnboardingStepCounter activeStep={2} />
 
-      {/* Topics selection fields go here */}
+        {/* Topics selection fields go here */}
 
-      <div className="flex justify-between px-12 mt-6">
-        <button onClick={onBack} className="text-sm font-medium text-grey">
-          Back
-        </button>
-        <button
-          onClick={handleContinue}
-          className="bg-black text-white px-6 py-2 rounded-lg text-sm font-medium"
-        >
-          Continue
-        </button>
+        <div className="flex justify-between px-12 mt-6">
+          <button onClick={onBack} className="text-sm font-medium text-grey">
+            Back
+          </button>
+          <button
+            onClick={handleContinue}
+            className="bg-black text-white px-6 py-2 rounded-lg text-sm font-medium"
+          >
+            Continue
+          </button>
+        </div>
       </div>
     </div>
   );

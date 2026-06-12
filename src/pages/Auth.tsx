@@ -26,7 +26,7 @@ function Auth() {
     <GradientBg>
       <Navbar role="auth" />
 
-      <section className="flex h-[110vh] gap-6 pr-3 pb-10">
+      <section className="flex h-[110vh] gap-6 pr-3 pb-10 animate-fade-slide-up">
         {/* Left column */}
         <div className="flex-1 flex items-center justify-center px-12 pt-16">
           {step === "auth" ? (

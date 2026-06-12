@@ -25,6 +25,7 @@
     url("/fonts/SaansTRIAL-SemiBold.woff") format("woff");
   font-weight: 600;
 }
+
 @theme {
   /* Fonts */
   --font-sans: "Saans-TRIAL", sans-serif;
@@ -51,6 +52,18 @@
   --color-footer-pink: #edc0c5;
   --color-footer-yellow: #e7e7d5;
   --color-footer-purple: #d5d1e2;
+
+  /* 🛠️ Add Tailwind v4 Keyframes config */
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 /* Global base styles */
@@ -59,4 +72,9 @@
     background-color: #f6f1e4;
     font-family: "Saans-TRIAL", sans-serif;
   }
+}
+
+/* 🛠️ Reusable utility class */
+.animate-fade-slide-up {
+  animation: fadeSlideUp 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

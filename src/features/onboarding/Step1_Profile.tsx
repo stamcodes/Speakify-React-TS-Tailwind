@@ -14,9 +14,12 @@ function Step1_Profile({ onNext }: Step1Props) {
   return (
     <div>
       <Navbar role="auth" />
-      <OnboardingStepCounter activeStep={1} />
-      {/* form fields */}
-      <button onClick={handleContinue}></button>
+      <div className="animate-fade-slide-up">
+        <OnboardingStepCounter activeStep={1} />
+        {/* Add the toggle Component first */}
+        {/* form fields */}
+        <button onClick={handleContinue}></button>
+      </div>
     </div>
   );
 }
